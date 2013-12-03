@@ -4,8 +4,8 @@
 
 CPC::CPC(void)
 {
-	m_Power = 10;
-	m_Name = "플레이어";
+	m_Power = 50;
+	m_Name = "이원효";
 	m_Exp = 0;
 }
 

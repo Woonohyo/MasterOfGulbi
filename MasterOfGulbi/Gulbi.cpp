@@ -11,4 +11,5 @@ CGulbi::CGulbi(void)
 
 CGulbi::~CGulbi(void)
 {
+
 }

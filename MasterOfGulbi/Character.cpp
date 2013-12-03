@@ -42,10 +42,8 @@ void CCharacter::PrintPosition() {
 	printf_s("[Current Position: %d, %d]\n", m_position.x, m_position.y);
 }
 
-void CCharacter::HitCheck(AttackResult result, int damage)
-{
-	switch (result)
-	{
+void CCharacter::HitCheck(AttackResult result, int damage) {
+	switch (result) {
 	case ATTACK_HIT:
 		printf_s("-- %s는 굴비 손질을 통해 %d만큼의 체력을 소모했다.\n\n", GetName().c_str(), damage);
 		m_HP -= damage;
@@ -54,7 +52,7 @@ void CCharacter::HitCheck(AttackResult result, int damage)
 		printf_s("-- %s는 무사히 굴비 손질을 하였다.\n\n", GetName().c_str());
 		break;
 	case ATTACK_GUARD:
-		printf_s("-- %s는 굴비 손질을 통해 평소보다 적은 %d만큼의 체력을 소모했다\n\n", GetName().c_str(), damage / 2);
+		printf_s("-- %s는 숙련된 굴비 손질을 통해 평소의 절반인 %d만큼의 체력을 소모했습니다.\n\n", GetName().c_str(), damage / 2);
 		m_HP -= damage / 2;
 		break;        
 	default:

@@ -40,7 +40,7 @@ public:
 	int Power() const { return m_Power; }
 	void Power(int val) { m_Power = val; }
 	int Exp() const { return m_Exp; }
-	void Exp(int val) { m_Exp = val; }
+	void GetExp(int val) { m_Exp += val; }
 
 	bool IsAlive() { return m_HP > 0; }
 	void HitCheck(AttackResult result, int damage);

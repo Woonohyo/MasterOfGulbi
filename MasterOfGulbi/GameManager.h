@@ -7,6 +7,11 @@ enum GameState {
 	BATTLE
 };
 
+enum BattleResult {
+	BATTLE_WIN,
+	BATTLE_LOSE
+};
+
 class CGameManager
 {
 public:
@@ -21,7 +26,7 @@ protected:
 	bool InputProc();
 	void CreateGulbies();
 	void CheckMap();
-	void StartBattle(CGulbi * pGulbi);
+	BattleResult StartBattle(CGulbi * pGulbi);
 protected:
 	CGameMap m_Map;
 	CPC * m_PC;

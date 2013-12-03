@@ -6,6 +6,6 @@ class CGulbi:
 {
 public:
 	CGulbi(void);
-	~CGulbi(void);
+	virtual ~CGulbi(void);
 };
 

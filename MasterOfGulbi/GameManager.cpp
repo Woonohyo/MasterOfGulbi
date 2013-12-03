@@ -19,6 +19,7 @@ CGameManager::~CGameManager(void)
 
 void CGameManager::Init() {
 	printf("[게임이 시작되었습니다.]\n");
+	printf("201x년 9월. NEXT에서 바쁜 2학기가 끝나고 3주간의 가을방학이 시작되었다\n.");
 	printf("당신의 이름을 입력해주세요: ");
 	std::string strInput;
 	getline(std::cin, strInput);
@@ -105,42 +106,88 @@ void CGameManager::CheckMap() {
 	if(!pMapInfo)
 		return;
 
-	if(pMapInfo->pGulbi) {
+	if(pMapInfo->pGulbi && pMapInfo->pGulbi->IsAlive()) {  //이른 종결이 되므로 Null Ptr 참조 에러가 발생하지 않는다.
 		m_GameState = BATTLE;
-		StartBattle(pMapInfo->pGulbi);
+		BattleResult result = StartBattle(pMapInfo->pGulbi);
+		if (result == BATTLE_WIN) {
+			delete pMapInfo->pGulbi;
+			pMapInfo->pGulbi = nullptr;
+		}
 	}
 }
 
-void CGameManager::StartBattle( CGulbi* pGulbi ) {
-	printf_s("<<<< 고객이 왔습니다. 굴비 손질을 시작합니다. >>>\n");
+//Map을 넘기거나 이중 포인터를 사용하는 것은 다소 우아하지 못하다.
+BattleResult CGameManager::StartBattle( CGulbi* pGulbi) {
+	BattleResult battleResult = (BattleResult)NULL;
+	if (!m_PC->IsAlive()) {
+		printf_s(" 기절 상태에서는 굴비를 손질할 수 없습니다.\n ");
+		m_GameState = NORMAL;
+	}
 
 	while (m_PC->IsAlive() && pGulbi->IsAlive()) {
 		printf_s("< 굴비를 손질합니다. >\n");                
 		AttackResult result = (AttackResult)(rand() % ATTACK_COUNT);
-		int damage = m_PC->Power() + (m_PC->Power() % POWER_OFFSET * 2) - POWER_OFFSET;
+
+		// POWER_OFFSET만큼 데미지에 +- 한다. 많이 쓰이는 기법!
+		int damage = m_PC->Power() + (rand() % POWER_OFFSET * 2) - POWER_OFFSET;
 		pGulbi->HitCheck(result, damage);
 
-		if(!m_PC->IsAlive()) {
-			printf_s(" 과로로 인해 기절해버리고 말았습니다. \n");
+		//플레이어 턴에 플레이어가 살아 있는 지 체크하는 건 의미가 없다.
+		// 플레이어 턴에는 몬스터의 생사 여부를 판단해야 한다.
+		if(!pGulbi->IsAlive()) {
+			printf_s("굴비(%s) 손질을 완료했습니다!!\n", pGulbi->GetName().c_str());
+			printf_s("경험치가 %d 상승했습니다.\n", pGulbi->Exp());
+			m_PC->GetExp(pGulbi->Exp());
+			battleResult = BATTLE_WIN;
 			break;
 		}
 
 		// 몬스터 턴
 		printf_s("< 굴비(%s)가시에 손을 찔리고 말았습니다. >\n", pGulbi->GetName().c_str());
 		result = (AttackResult)(rand() % ATTACK_COUNT);
-		damage = pGulbi->Power() + (m_PC->Power() % POWER_OFFSET * 2) - POWER_OFFSET;
+		damage = pGulbi->Power() + (rand() % POWER_OFFSET * 2) - POWER_OFFSET;
 		m_PC->HitCheck(result, damage);                
 
-		if(!pGulbi->IsAlive()) {
-			printf_s("굴비(%s) 손질을 완료했습니다!!\n", pGulbi->GetName().c_str());
-			printf_s("경험치가 %d 상승했습니다.\n", pGulbi->Exp());
-			m_PC->Exp(pGulbi->Exp());
-			break;
+		if(!m_PC->IsAlive()) {
+			printf_s(" 과로로 인해 기절해 버리고 말았습니다. \n");
+			battleResult = BATTLE_LOSE;
 		}
+		
 
-		Sleep(500);
+		Sleep(250);
 	}
 
 	printf_s("<<<<< 손질한 굴비를 고객에게 전달해주었습니다. >>>>>>\n");
 	m_GameState = NORMAL;
+	return battleResult;
+}
+
+
+int loop (int x, int n) {
+	int result = 0x55555555;
+	int mask;
+	for ( mask = 0x80000000; mask != 0; mask = ((unsigned int) mask) >> n ) {
+		result ^= (x & mask);
+	}
+}
+
+int switch_prob ( int x, int n ) {
+	int result = x;
+
+	switch (n) {
+	case 40:
+	case 42:
+		result = x * 8;
+		break;
+	case 43:
+		result = x / 8;
+		break;
+	case 44:
+		result = x * 7;
+	case 45:
+		result = x * x;
+	default:
+		result = x + 17;
+	}
+	return result;
 }

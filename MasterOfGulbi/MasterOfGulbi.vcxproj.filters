@@ -1,0 +1,76 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <Text Include="ReadMe.txt" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="stdafx.h" />
+    <ClInclude Include="targetver.h" />
+    <ClInclude Include="Character.h">
+      <Filter>Characters</Filter>
+    </ClInclude>
+    <ClInclude Include="GameManager.h">
+      <Filter>Admin</Filter>
+    </ClInclude>
+    <ClInclude Include="NPC.h">
+      <Filter>Characters</Filter>
+    </ClInclude>
+    <ClInclude Include="PC.h">
+      <Filter>Characters</Filter>
+    </ClInclude>
+    <ClInclude Include="Gulbi.h">
+      <Filter>Characters</Filter>
+    </ClInclude>
+    <ClInclude Include="GameMap.h">
+      <Filter>Maps</Filter>
+    </ClInclude>
+    <ClInclude Include="ColdStroageMap.h">
+      <Filter>Maps</Filter>
+    </ClInclude>
+    <ClInclude Include="Items.h">
+      <Filter>Inventory</Filter>
+    </ClInclude>
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="MasterOfGulbi.cpp" />
+    <ClCompile Include="stdafx.cpp" />
+    <ClCompile Include="Character.cpp">
+      <Filter>Characters</Filter>
+    </ClCompile>
+    <ClCompile Include="GameManager.cpp">
+      <Filter>Admin</Filter>
+    </ClCompile>
+    <ClCompile Include="NPC.cpp">
+      <Filter>Characters</Filter>
+    </ClCompile>
+    <ClCompile Include="PC.cpp">
+      <Filter>Characters</Filter>
+    </ClCompile>
+    <ClCompile Include="Gulbi.cpp">
+      <Filter>Characters</Filter>
+    </ClCompile>
+    <ClCompile Include="GameMap.cpp">
+      <Filter>Maps</Filter>
+    </ClCompile>
+    <ClCompile Include="ColdStroageMap.cpp">
+      <Filter>Maps</Filter>
+    </ClCompile>
+    <ClCompile Include="Items.cpp">
+      <Filter>Inventory</Filter>
+    </ClCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <Filter Include="Maps">
+      <UniqueIdentifier>{7b43fe1c-924b-4c94-a9eb-fcf25c84eabc}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Admin">
+      <UniqueIdentifier>{d739e982-870d-40f7-a709-1ba5ddcd203d}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Characters">
+      <UniqueIdentifier>{a929df20-a258-4319-8dcc-92357de43738}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Inventory">
+      <UniqueIdentifier>{6d29813d-c8a0-4a9d-aff1-4ae98eec1962}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+</Project>
