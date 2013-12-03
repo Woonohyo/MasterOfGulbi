@@ -161,33 +161,3 @@ BattleResult CGameManager::StartBattle( CGulbi* pGulbi) {
 	m_GameState = NORMAL;
 	return battleResult;
 }
-
-
-int loop (int x, int n) {
-	int result = 0x55555555;
-	int mask;
-	for ( mask = 0x80000000; mask != 0; mask = ((unsigned int) mask) >> n ) {
-		result ^= (x & mask);
-	}
-}
-
-int switch_prob ( int x, int n ) {
-	int result = x;
-
-	switch (n) {
-	case 40:
-	case 42:
-		result = x * 8;
-		break;
-	case 43:
-		result = x / 8;
-		break;
-	case 44:
-		result = x * 7;
-	case 45:
-		result = x * x;
-	default:
-		result = x + 17;
-	}
-	return result;
-}
