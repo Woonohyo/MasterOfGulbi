@@ -1,4 +1,4 @@
-#include "stdafx.h"
+ï»¿#include "stdafx.h"
 #include "Character.h"
 #include "GameMap.h"
 
@@ -11,6 +11,8 @@ CCharacter::~CCharacter(void) {
 }
 
 Position CCharacter::Move(DIRECTION dir) {
+
+	// agebreak : ì´ë™ì‹œì— 0 ~ 10ê¹Œì§€ ê°€ëŠ” ë²„ê·¸ê°€ ìˆìŠµë‹ˆë‹¤. (0 ~ 9ê¹Œì§€ ê°€ì•¼ë¨)
 	switch (dir) {
 	case DIR_UP:
 		m_position.y = __max(m_position.y - 1, 0);
@@ -45,14 +47,14 @@ void CCharacter::PrintPosition() {
 void CCharacter::HitCheck(AttackResult result, int damage) {
 	switch (result) {
 	case ATTACK_HIT:
-		printf_s("-- %s´Â ±¼ºñ ¼ÕÁúÀ» ÅëÇØ %d¸¸Å­ÀÇ Ã¼·ÂÀ» ¼Ò¸ğÇß´Ù.\n\n", GetName().c_str(), damage);
+		printf_s("-- %sëŠ” êµ´ë¹„ ì†ì§ˆì„ í†µí•´ %dë§Œí¼ì˜ ì²´ë ¥ì„ ì†Œëª¨í–ˆë‹¤.\n\n", GetName().c_str(), damage);
 		m_HP -= damage;
 		break;
 	case ATTACK_MISS:  
-		printf_s("-- %s´Â ¹«»çÈ÷ ±¼ºñ ¼ÕÁúÀ» ÇÏ¿´´Ù.\n\n", GetName().c_str());
+		printf_s("-- %sëŠ” ë¬´ì‚¬íˆ êµ´ë¹„ ì†ì§ˆì„ í•˜ì˜€ë‹¤.\n\n", GetName().c_str());
 		break;
 	case ATTACK_GUARD:
-		printf_s("-- %s´Â ¼÷·ÃµÈ ±¼ºñ ¼ÕÁúÀ» ÅëÇØ Æò¼ÒÀÇ Àı¹İÀÎ %d¸¸Å­ÀÇ Ã¼·ÂÀ» ¼Ò¸ğÇß½À´Ï´Ù.\n\n", GetName().c_str(), damage / 2);
+		printf_s("-- %sëŠ” ìˆ™ë ¨ëœ êµ´ë¹„ ì†ì§ˆì„ í†µí•´ í‰ì†Œì˜ ì ˆë°˜ì¸ %dë§Œí¼ì˜ ì²´ë ¥ì„ ì†Œëª¨í–ˆìŠµë‹ˆë‹¤.\n\n", GetName().c_str(), damage / 2);
 		m_HP -= damage / 2;
 		break;        
 	default:
