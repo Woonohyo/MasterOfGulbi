@@ -5,18 +5,16 @@
 
 #define MAP_SIZE 10
 
-enum MapState {
-	HOME,
-	SUBWAY,
-	DEPART,
-	STORAGE
-};
-
 struct MapInfo {
 	CGulbi * pGulbi;
 	CNPC * pNPC;
-	MapState m_MapState;
-	//∏  ≈∏¿‘ √ﬂ∞°
+};
+
+enum MapState {
+	HOME,
+	SUBWAY,
+	DEPARTMENT,
+	STORAGE
 };
 
 class CGameMap {

@@ -17,7 +17,6 @@ class CGameManager
 public:
 	CGameManager(void);
 	~CGameManager(void);
-
 	void Init();
 	void Run();
 	void Release();
@@ -27,7 +26,6 @@ protected:
 	void CreateGulbies();
 	void CheckMap();
 	BattleResult StartBattle(CGulbi * pGulbi);
-protected:
 	CGameMap m_Map;
 	CPC * m_PC;
 	GameState m_GameState;

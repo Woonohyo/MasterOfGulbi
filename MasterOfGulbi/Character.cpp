@@ -41,13 +41,20 @@ void CCharacter::SetPosition(int x, int y) {
 }
 
 void CCharacter::PrintPosition() {
-	printf_s("[Current Position: %d, %d]\n", m_position.x, m_position.y);
+	if(m_mapState == STORAGE)
+		printf_s("[³Ãµ¿Ã¢°í ³» ÇöÀç À§Ä¡: %d, %d]\n", m_position.x, m_position.y);
+	else
+		printHere();
 }
 
 void CCharacter::HitCheck(AttackResult result, int damage) {
 	switch (result) {
 	case ATTACK_HIT:
+<<<<<<< HEAD
 		printf_s("-- %sëŠ” êµ´ë¹„ ì†ì§ˆì„ í†µí•´ %dë§Œí¼ì˜ ì²´ë ¥ì„ ì†Œëª¨í–ˆë‹¤.\n\n", GetName().c_str(), damage);
+=======
+		printf_s("-- %s´Â ±¼ºñ ¼ÕÁúÀ» ÇÏ¿© %d¸¸Å­ÀÇ Ã¼·ÂÀ» ¼Ò¸ğÇß´Ù.\n\n", GetName().c_str(), damage);
+>>>>>>> ë§µ ê°„ ì´ë™ êµ¬í˜„
 		m_HP -= damage;
 		break;
 	case ATTACK_MISS:  
@@ -57,6 +64,26 @@ void CCharacter::HitCheck(AttackResult result, int damage) {
 		printf_s("-- %sëŠ” ìˆ™ë ¨ëœ êµ´ë¹„ ì†ì§ˆì„ í†µí•´ í‰ì†Œì˜ ì ˆë°˜ì¸ %dë§Œí¼ì˜ ì²´ë ¥ì„ ì†Œëª¨í–ˆìŠµë‹ˆë‹¤.\n\n", GetName().c_str(), damage / 2);
 		m_HP -= damage / 2;
 		break;        
+	default:
+		break;
+	}
+}
+
+void CCharacter::printHere() {
+	switch(m_mapState) {
+	case HOME:
+		printf_s("Áö±İÀº Æí¾ÈÇÑ Áı¿¡ ÀÖ½À´Ï´Ù.\n");
+		break;
+	case STORAGE:
+		printf_s("³Ãµ¿Ã¢°í¿¡ µé¾î¿Ô½À´Ï´Ù. Â÷°¡¿î ¹Ù¶÷¿¡ ¸öÀÌ ¶³¸³´Ï´Ù.\n");
+		printf_s("Áö±İºÎÅÍ ±¼ºñ¸¦ Ã£±â À§ÇÑ ¸Ê ÀÌµ¿ÀÌ °¡´ÉÇØÁı´Ï´Ù.\n");
+		break;
+	case DEPARTMENT:
+		printf_s("¹éÈ­Á¡À¸·Î µé¾î¿Ô½À´Ï´Ù.\n");
+		break;
+	case SUBWAY:
+		printf_s("ÁöÇÏÃ¶¿¡ Å¾½ÂÇß½À´Ï´Ù.\n");
+		break;
 	default:
 		break;
 	}

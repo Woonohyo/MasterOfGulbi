@@ -9,6 +9,7 @@
 CGameManager::CGameManager(void):
 	m_GameState(NORMAL) {
 		m_PC = new CPC();
+
 }
 
 
@@ -18,13 +19,15 @@ CGameManager::~CGameManager(void)
 }
 
 void CGameManager::Init() {
-	printf("[게임이 시작되었습니다.]\n");
-	printf("201x년 9월. NEXT에서 바쁜 2학기가 끝나고 3주간의 가을방학이 시작되었다\n.");
-	printf("당신의 이름을 입력해주세요: ");
+	printf_s("[게임이 시작되었습니다.]\n");
+	printf_s("201x년 9월. NEXT에서 바쁜 2학기가 끝나고 3주간의 가을방학이 시작되었다\n.");
+	printf_s("하지만 그와 동시에 나에겐 우편물이 하나 날아왔고..\n");
+	printf_s("그건 이전에 미처 갚지 못한 학자금\n");
+	printf_s("당신의 이름을 입력해주세요: ");
 	std::string strInput;
 	getline(std::cin, strInput);
 	m_PC->SetName(strInput);
-	printf("%s님이군요. 알겠습니다.\n", strInput.c_str());
+	printf_s("%s님이군요. 알겠습니다.\n", strInput.c_str());
 
 
 	srand((unsigned)time(NULL));
@@ -41,14 +44,14 @@ void CGameManager::Run() {
 }
 
 void CGameManager::Release() {
-	printf("[게임이 끝났습니다.]\n");
+	printf_s("[게임이 끝났습니다.]\n");
 }
 
 bool CGameManager::InputProc() {
 	std::string strInput;
 	getline(std::cin, strInput);
 
-	printf("Input : %s\n", strInput.c_str());        
+	printf_s("Input : %s\n", strInput.c_str());        
 
 	if(strInput == "W" || strInput == "w") {
 		m_PC->Move(DIR_UP);
@@ -63,12 +66,43 @@ bool CGameManager::InputProc() {
 		m_PC->Move(DIR_RIGHT);
 	}
 
-	if(strInput == "c" || strInput == "C") {
-		printf("현재 체력은 %d입니다.\n", m_PC->HP());
-		printf("현재 경험치는 %d입니다.\n", m_PC->Exp());
+	if(strInput == "여기") {
+		m_PC->printHere();
 	}
 
-	m_PC->PrintPosition();
+	if(strInput == "c" || strInput == "C") {
+		printf_s("현재 체력은 %d입니다.\n", m_PC->HP());
+		printf_s("현재 경험치는 %d입니다.\n", m_PC->Exp());
+	}
+
+	if(strInput == "집") {
+		m_PC->goHome();
+		m_PC->printHere();
+	}
+
+	if(strInput == "백화점") {
+		if (m_PC->isSubway() || m_PC->isStorage()) {
+			m_PC->goDepartment();
+			m_PC->printHere();
+		}
+		else nonMovable();
+	}
+
+	if(strInput == "창고") {
+		if (m_PC->isDepartment()) {
+			m_PC->goStorage();
+			m_PC->printHere();
+		}
+		else nonMovable();
+	}
+
+	if(strInput == "지하철") {
+		if (m_PC->isHome() || m_PC->isDepartment()) {
+			m_PC->goSubway();
+			m_PC->printHere();
+		}
+		else nonMovable();
+	}
 
 	if(strInput == "Q" || strInput == "q")
 		return false;
@@ -160,4 +194,9 @@ BattleResult CGameManager::StartBattle( CGulbi* pGulbi) {
 	printf_s("<<<<< 손질한 굴비를 고객에게 전달해주었습니다. >>>>>>\n");
 	m_GameState = NORMAL;
 	return battleResult;
+}
+
+void CGameManager::nonMovable()
+{
+	printf_s("현재의 장소에서는 그 곳으로 이동할 수 없습니다.");
 }

@@ -13,3 +13,9 @@ CPC::CPC(void)
 CPC::~CPC(void)
 {
 }
+
+bool CPC::isSubway() {
+	if(m_mapState == SUBWAY)
+	return true;
+
+}

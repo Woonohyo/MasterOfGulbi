@@ -5,6 +5,7 @@ struct Position {
 	int y;
 };
 
+
 enum DIRECTION {
 	DIR_UP,
 	DIR_DOWN,
@@ -45,8 +46,20 @@ public:
 	bool IsAlive() { return m_HP > 0; }
 	void HitCheck(AttackResult result, int damage);
 
+	void goHome() {m_mapState = HOME;}
+	void goDepartment() {m_mapState = DEPARTMENT;}
+	void goSubway() {m_mapState = SUBWAY;}
+	void goStorage() {m_mapState = STORAGE;}\
+	void printHere();
+	bool isSubway() {if(m_mapState==SUBWAY) return true;}
+	bool isStorage() {if(m_mapState==STORAGE) return true;}
+	bool isHome() {if(m_mapState==HOME) return true;}
+	bool isDepartment() {if(m_mapState==DEPARTMENT) return true;}
+
+
 protected:
 	Position m_position;
+	MapState m_mapState;
 	std::string m_Name;
 	int m_HP;
 	int m_Power;
