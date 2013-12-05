@@ -20,6 +20,13 @@ enum AttackResult {
 	ATTACK_COUNT
 };
 
+enum MapState {
+	HOME,
+	SUBWAY,
+	DEPARTMENT,
+	STORAGE
+};
+
 class CCharacter
 {
 public:
@@ -49,12 +56,12 @@ public:
 	void goHome() {m_mapState = HOME;}
 	void goDepartment() {m_mapState = DEPARTMENT;}
 	void goSubway() {m_mapState = SUBWAY;}
-	void goStorage() {m_mapState = STORAGE;}\
+	void goStorage() {m_mapState = STORAGE;}
 	void printHere();
-	bool isSubway() {if(m_mapState==SUBWAY) return true;}
-	bool isStorage() {if(m_mapState==STORAGE) return true;}
-	bool isHome() {if(m_mapState==HOME) return true;}
-	bool isDepartment() {if(m_mapState==DEPARTMENT) return true;}
+	bool isSubway() {if(m_mapState==SUBWAY) return true; else return false;}
+	bool isStorage() {if(m_mapState==STORAGE) return true; else return false;}
+	bool isHome() {if(m_mapState==HOME) return true; else return false;}
+	bool isDepartment() {if(m_mapState==DEPARTMENT) return true; else return false;}
 
 
 protected:

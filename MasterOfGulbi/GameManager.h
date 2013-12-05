@@ -25,6 +25,7 @@ protected:
 	bool InputProc();
 	void CreateGulbies();
 	void CheckMap();
+	void nonMovable();
 	BattleResult StartBattle(CGulbi * pGulbi);
 	CGameMap m_Map;
 	CPC * m_PC;

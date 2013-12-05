@@ -198,5 +198,5 @@ BattleResult CGameManager::StartBattle( CGulbi* pGulbi) {
 
 void CGameManager::nonMovable()
 {
-	printf_s("현재의 장소에서는 그 곳으로 이동할 수 없습니다.");
+	printf_s("현재 장소에서는 그 곳으로 이동할 수 없습니다.");
 }

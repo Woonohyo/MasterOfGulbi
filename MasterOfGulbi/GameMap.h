@@ -10,13 +10,6 @@ struct MapInfo {
 	CNPC * pNPC;
 };
 
-enum MapState {
-	HOME,
-	SUBWAY,
-	DEPARTMENT,
-	STORAGE
-};
-
 class CGameMap {
 public:
 	CGameMap(void);
