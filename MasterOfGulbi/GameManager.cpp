@@ -1,4 +1,4 @@
-#include "stdafx.h"
+ï»¿#include "stdafx.h"
 #include "GameManager.h"
 #include <windows.h>
 #include <time.h>
@@ -18,20 +18,39 @@ CGameManager::~CGameManager(void)
 	delete m_PC;
 }
 
-void CGameManager::Init() {
-	printf_s("[°ÔÀÓÀÌ ½ÃÀÛµÇ¾ú½À´Ï´Ù.]\n");
-	printf_s("201x³â 9¿ù. NEXT¿¡¼­ ¹Ù»Û 2ÇĞ±â°¡ ³¡³ª°í 3ÁÖ°£ÀÇ °¡À»¹æÇĞÀÌ ½ÃÀÛµÇ¾ú´Ù\n.");
-	printf_s("ÇÏÁö¸¸ ±×¿Í µ¿½Ã¿¡ ³ª¿¡°Õ ¿ìÆí¹°ÀÌ ÇÏ³ª ³¯¾Æ¿Ô°í..\n");
-	printf_s("±×°Ç ÀÌÀü¿¡ ¹ÌÃ³ °±Áö ¸øÇÑ ÇĞÀÚ±İ\n");
-	printf_s("´ç½ÅÀÇ ÀÌ¸§À» ÀÔ·ÂÇØÁÖ¼¼¿ä: ");
+void CGameManager::Init() {            
+	system("cls");
+	printf_s("##     ##    ###     ######  ######## ######## ########      #######  ########     ######   ##     ## ##       ########  ####\n");
+	printf_s("###   ###   ## ##   ##    ##    ##    ##       ##     ##    ##     ## ##          ##    ##  ##     ## ##       ##     ##  ## \n");
+	printf_s("#### ####  ##   ##  ##          ##    ##       ##     ##    ##     ## ##          ##        ##     ## ##       ##     ##  ## \n");
+	printf_s("## ### ## ##     ##  ######     ##    ######   ########     ##     ## ######      ##   #### ##     ## ##       ########   ## \n");
+	printf_s("##     ## #########       ##    ##    ##       ##   ##      ##     ## ##          ##    ##  ##     ## ##       ##     ##  ## \n");
+	printf_s("##     ## ##     ## ##    ##    ##    ##       ##    ##     ##     ## ##          ##    ##  ##     ## ##       ##     ##  ## \n");
+	printf_s("##     ## ##     ##  ######     ##    ######## ##     ##     #######  ##           ######    #######  ######## ########  ####\n");
+	printf_s("ã€€ ï¼¼ã€€ã€€ã€€ã€€ã€€ã€€ã€€ï¼¿ï¼¿ï¼¿ï¼¿ï¼¿ï¼¿ï¼¿ï¼¿__ï¼ã‚\n");
+	printf_s("ã€€ã€€ã€€ï¼¼ã€€ã€€,,ãƒ¼â€â€ä¸¶;:;:;:;:;:;:;:;;:;:;ãƒ½;:;:;:;:;:;:;:;:;:;:;:ãƒ½' ã€€ã‚\n");
+	printf_s("ã€€ã€€ã€€ã€€ã€€X/~ã‚œ'ï¼¼ãƒ¾ ï¼ˆâ—ï¼‰;:;:;:;:;:;:ãƒ½;:;:;:;:;:;:;:;:;:;:;:;:;ãƒ½' ã‚\n");
+	printf_s("ã€€ã€€ã€€ã€€ã€€ãƒ½ï¼¼ã€€ã€€ ï¼¼ã‚:;:;:;:;:;:;:;:;:;:;:;|;:;:;::ã€€ï¼¿ï¼¿;:;:;:;ãƒ½' ã‚\n");
+	printf_s("ã€€ã€€ã€€ã€€ã€€ã€€ | |ï¼¼ã€€ã€€ ã€‹ã€€ã€€ã€€ã€€;:;:;:ä¸¿;:;ï¼ã€€ ,ï¼;:;:;:;;:;ï¼¼/\n");
+	printf_s("ã€€ã€€ã€€ã€€ã€€ã€€//,,ã€€ï¼¼ã€ƒã‚ã€€ ã€€ã€€ä¸¿(ã€†ã€€ _ï¼;i|!|;:;::;:;:;:;:;ï¼¼\n");
+	printf_s("ã€€ã€€ã€€ã€€ã€€ï¼ˆäºŒäºŒãƒã‚¾ã€€ ã€€ ã€€ ãƒã€€ã€€ âŒ’ï¿£;:;:;;::;:;:|!|i:;:;;;:;:;:;:;|\n");
+	printf_s("ã€€ã€€ã€€ã€€ã€€ã€€ãƒ½ãƒ¼-ãƒ‹ãƒ‹ãƒ¼ãƒ¼ãƒ¼'''''Â´ã€€ã€€ã€€ã€€ã€€ã€€ã€€ ;:;:;:;;:;!|i|:;:;:;:;:;:;|\n");
+	printf_s("ã€€ã€€ã€€ã€€ã€€ã€€ã€€ã€€ã€€ãƒ½ãƒ¼ãƒ¼ãƒ½_ã€€ã€€_ã€€ã€€ ã€€ã€€ã€€ã€€ã€€ã€€ ;:;:;::;|!|!:;:;:;:|\n");
+	printf_s("ã€€ã€€ã€€ã€€ã€€ã€€Â´ ã€€ã€€ã€€ã€€ã€€ã€€ã€€ï¿£ï¼¼_ã€€ã€€ï¼œï¿£,,/ ã€€ ã€€ ;:;:;i|!:;:;|\n");
+	printf_s("ã€€ã€€ã€€ã€€ã€€ã€€ã€€ã‚œ ã€€ã€€ã€€ã€€ã€€ã€€ã€€ã€€ ã€€ï½€ï¼¼_ã€€ï¼¼/ã€€ã€€ã€€ ã€€.:;:;:;|i!|\n");
+	printf_s("ã€€ã€€ã€€ã€€ã€€ã€€;ã€€ã€€ã€€ã€€ã€€ ã€€ ã€€'ã€€ã€€ã€€ã€€ ã€€ ï½€'ãƒ½ã€€ã€€ã€€ ã€€ã€€.;:;:/ã€€ã€€ã€€ã€€ã€€ã€€ã€€ã€€ã‚œ\n");
+	printf_s("ã€€ã€€ã€€ã€€ã€€ã€€ã€€ã€€ã€€ã€ã€€ ã€€ã€€ ã€€ã‚œã€€ã€€ã€€ã€€ã€€ã€€ã€€ ï½€'ãƒ½ã€€ã€€ã€€,/ã€€ã€€ï½€ã€€ã€€ã€€ã€€ã€€ã€€ã€€ã€€Â´\n");
+	printf_s("ã€€ã€€ã€€ã€€ã€€ã€‚ã€€ ã€€ã€€ã€€ã€€ã€€ã€€ã€€ã€€ã€€ã€€ã€€ã€€ã€€ã€€_ï¼¿ï¼¿__ã‚½:::ã€€,/ã€€ã€€ã€€ã€‚\n");
+	printf_s("ã€€ã€€ã€€ã€€ã€€ã€€ã€€ã€€ã€€ã€€ã€€ã€€ã€€ã€€ã€€ã€€ã€€ã€€ã€€ã€€ã€€ï¼¼:;;::;::;::;ã€€ ,/ã€€;ã‚œã€€ ã€\n");
+	printf_s("ã€€ã€€ã€€ã€€ã€€ã€€ã€€ã€€ã€€ã€€;Â´ã€€ã€€ã€€ã€€ã€€ã€€ã€€ã‚œã€€ã€‚ã€€ã€€ ã‚,;:;:;:;:/\n");
+	printf_s("201xë…„ 9ì›”. NEXTì—ì„œ ë°”ìœ 2í•™ê¸°ê°€ ëë‚˜ê³  3ì£¼ê°„ì˜ ê°€ì„ë°©í•™ì´ ì‹œì‘ë˜ì—ˆë‹¤\n.");
+	printf_s("í•˜ì§€ë§Œ ê·¸ì™€ ë™ì‹œì— ë‚˜ì—ê² ìš°í¸ë¬¼ì´ í•˜ë‚˜ ë‚ ì•„ì™”ê³ ..\n");
+	printf_s("ê·¸ê±´ ì´ì „ì— ë¯¸ì²˜ ê°šì§€ ëª»í•œ í•™ìê¸ˆì´ì—ˆë‹¤.\n");
+	printf_s("ë‹¹ì‹ ì˜ ì´ë¦„ì„ ì…ë ¥í•´ì£¼ì„¸ìš”: ");
 	std::string strInput;
 	getline(std::cin, strInput);
 	m_PC->SetName(strInput);
-	printf_s("%s´ÔÀÌ±º¿ä. ¾Ë°Ú½À´Ï´Ù.\n", strInput.c_str());
-
-
-	srand((unsigned)time(NULL));
-	CreateGulbies();
+	printf_s("%së‹˜ì´êµ°ìš”. ì•Œê² ìŠµë‹ˆë‹¤.\n", strInput.c_str());
 
 	m_PC -> SetPosition(0, 0);
 	m_PC -> PrintPosition();
@@ -44,7 +63,7 @@ void CGameManager::Run() {
 }
 
 void CGameManager::Release() {
-	printf_s("[°ÔÀÓÀÌ ³¡³µ½À´Ï´Ù.]\n");
+	printf_s("[ê²Œì„ì´ ëë‚¬ìŠµë‹ˆë‹¤.]\n");
 }
 
 bool CGameManager::InputProc() {
@@ -66,21 +85,21 @@ bool CGameManager::InputProc() {
 		m_PC->Move(DIR_RIGHT);
 	}
 
-	if(strInput == "¿©±â") {
+	if(strInput == "ì—¬ê¸°") {
 		m_PC->printHere();
 	}
 
 	if(strInput == "c" || strInput == "C") {
-		printf_s("ÇöÀç Ã¼·ÂÀº %dÀÔ´Ï´Ù.\n", m_PC->HP());
-		printf_s("ÇöÀç °æÇèÄ¡´Â %dÀÔ´Ï´Ù.\n", m_PC->Exp());
+		printf_s("í˜„ì¬ ì²´ë ¥ì€ %dì…ë‹ˆë‹¤.\n", m_PC->HP());
+		printf_s("í˜„ì¬ ê²½í—˜ì¹˜ëŠ” %dì…ë‹ˆë‹¤.\n", m_PC->Exp());
 	}
 
-	if(strInput == "Áı") {
+	if(strInput == "ì§‘") {
 		m_PC->goHome();
 		m_PC->printHere();
 	}
 
-	if(strInput == "¹éÈ­Á¡") {
+	if(strInput == "ë°±í™”ì ") {
 		if (m_PC->isSubway() || m_PC->isStorage()) {
 			m_PC->goDepartment();
 			m_PC->printHere();
@@ -88,15 +107,17 @@ bool CGameManager::InputProc() {
 		else nonMovable();
 	}
 
-	if(strInput == "Ã¢°í") {
+	if(strInput == "ì°½ê³ ") {
 		if (m_PC->isDepartment()) {
 			m_PC->goStorage();
 			m_PC->printHere();
+			srand((unsigned)time(NULL));
+			CreateGulbies();
 		}
 		else nonMovable();
 	}
 
-	if(strInput == "ÁöÇÏÃ¶") {
+	if(strInput == "ì§€í•˜ì² ") {
 		if (m_PC->isHome() || m_PC->isDepartment()) {
 			m_PC->goSubway();
 			m_PC->printHere();
@@ -123,7 +144,7 @@ void CGameManager::CreateGulbies() {
 		if(pMapInfo->pGulbi == nullptr) {
 			pMapInfo->pGulbi = new CGulbi();                        
 
-			// ÀÌ¸§ ¼³Á¤       
+			// ì´ë¦„ ì„¤ì •       
 			sprintf_s(buf, "Gulbi %d", gulbiCount);
 			pMapInfo->pGulbi->SetName(buf);
 
@@ -131,7 +152,7 @@ void CGameManager::CreateGulbies() {
 		}
 	}
 
-	printf_s("<< ³Ãµ¿Ã¢°í¿¡ ±¼ºñ°¡ »ı¼ºµÇ¾ú½À´Ï´Ù. >>\n");
+	printf_s("<< ëƒ‰ë™ì°½ê³ ì— êµ´ë¹„ê°€ ìƒì„±ë˜ì—ˆìŠµë‹ˆë‹¤. >>\n");
 }
 
 void CGameManager::CheckMap() {
@@ -140,7 +161,7 @@ void CGameManager::CheckMap() {
 	if(!pMapInfo)
 		return;
 
-	if(pMapInfo->pGulbi && pMapInfo->pGulbi->IsAlive()) {  //ÀÌ¸¥ Á¾°áÀÌ µÇ¹Ç·Î Null Ptr ÂüÁ¶ ¿¡·¯°¡ ¹ß»ıÇÏÁö ¾Ê´Â´Ù.
+	if(pMapInfo->pGulbi && pMapInfo->pGulbi->IsAlive()) {  //ì´ë¥¸ ì¢…ê²°ì´ ë˜ë¯€ë¡œ Null Ptr ì°¸ì¡° ì—ëŸ¬ê°€ ë°œìƒí•˜ì§€ ì•ŠëŠ”ë‹¤.
 		m_GameState = BATTLE;
 		BattleResult result = StartBattle(pMapInfo->pGulbi);
 		if (result == BATTLE_WIN) {
@@ -150,40 +171,40 @@ void CGameManager::CheckMap() {
 	}
 }
 
-//MapÀ» ³Ñ±â°Å³ª ÀÌÁß Æ÷ÀÎÅÍ¸¦ »ç¿ëÇÏ´Â °ÍÀº ´Ù¼Ò ¿ì¾ÆÇÏÁö ¸øÇÏ´Ù.
+//Mapì„ ë„˜ê¸°ê±°ë‚˜ ì´ì¤‘ í¬ì¸í„°ë¥¼ ì‚¬ìš©í•˜ëŠ” ê²ƒì€ ë‹¤ì†Œ ìš°ì•„í•˜ì§€ ëª»í•˜ë‹¤.
 BattleResult CGameManager::StartBattle( CGulbi* pGulbi) {
 	BattleResult battleResult = (BattleResult)NULL;
 	if (!m_PC->IsAlive()) {
-		printf_s(" ±âÀı »óÅÂ¿¡¼­´Â ±¼ºñ¸¦ ¼ÕÁúÇÒ ¼ö ¾ø½À´Ï´Ù.\n ");
+		printf_s(" ê¸°ì ˆ ìƒíƒœì—ì„œëŠ” êµ´ë¹„ë¥¼ ì†ì§ˆí•  ìˆ˜ ì—†ìŠµë‹ˆë‹¤.\n ");
 		m_GameState = NORMAL;
 	}
 
 	while (m_PC->IsAlive() && pGulbi->IsAlive()) {
-		printf_s("< ±¼ºñ¸¦ ¼ÕÁúÇÕ´Ï´Ù. >\n");                
+		printf_s("< êµ´ë¹„ë¥¼ ì†ì§ˆí•©ë‹ˆë‹¤. >\n");                
 		AttackResult result = (AttackResult)(rand() % ATTACK_COUNT);
 
-		// POWER_OFFSET¸¸Å­ µ¥¹ÌÁö¿¡ +- ÇÑ´Ù. ¸¹ÀÌ ¾²ÀÌ´Â ±â¹ı!
+		// POWER_OFFSETë§Œí¼ ë°ë¯¸ì§€ì— +- í•œë‹¤. ë§ì´ ì“°ì´ëŠ” ê¸°ë²•!
 		int damage = m_PC->Power() + (rand() % POWER_OFFSET * 2) - POWER_OFFSET;
 		pGulbi->HitCheck(result, damage);
 
-		//ÇÃ·¹ÀÌ¾î ÅÏ¿¡ ÇÃ·¹ÀÌ¾î°¡ »ì¾Æ ÀÖ´Â Áö Ã¼Å©ÇÏ´Â °Ç ÀÇ¹Ì°¡ ¾ø´Ù.
-		// ÇÃ·¹ÀÌ¾î ÅÏ¿¡´Â ¸ó½ºÅÍÀÇ »ı»ç ¿©ºÎ¸¦ ÆÇ´ÜÇØ¾ß ÇÑ´Ù.
+		//í”Œë ˆì´ì–´ í„´ì— í”Œë ˆì´ì–´ê°€ ì‚´ì•„ ìˆëŠ” ì§€ ì²´í¬í•˜ëŠ” ê±´ ì˜ë¯¸ê°€ ì—†ë‹¤.
+		// í”Œë ˆì´ì–´ í„´ì—ëŠ” ëª¬ìŠ¤í„°ì˜ ìƒì‚¬ ì—¬ë¶€ë¥¼ íŒë‹¨í•´ì•¼ í•œë‹¤.
 		if(!pGulbi->IsAlive()) {
-			printf_s("±¼ºñ(%s) ¼ÕÁúÀ» ¿Ï·áÇß½À´Ï´Ù!!\n", pGulbi->GetName().c_str());
-			printf_s("°æÇèÄ¡°¡ %d »ó½ÂÇß½À´Ï´Ù.\n", pGulbi->Exp());
+			printf_s("êµ´ë¹„(%s) ì†ì§ˆì„ ì™„ë£Œí–ˆìŠµë‹ˆë‹¤!!\n", pGulbi->GetName().c_str());
+			printf_s("ê²½í—˜ì¹˜ê°€ %d ìƒìŠ¹í–ˆìŠµë‹ˆë‹¤.\n", pGulbi->Exp());
 			m_PC->GetExp(pGulbi->Exp());
 			battleResult = BATTLE_WIN;
 			break;
 		}
 
-		// ¸ó½ºÅÍ ÅÏ
-		printf_s("< ±¼ºñ(%s)°¡½Ã¿¡ ¼ÕÀ» Âñ¸®°í ¸»¾Ò½À´Ï´Ù. >\n", pGulbi->GetName().c_str());
+		// ëª¬ìŠ¤í„° í„´
+		printf_s("< êµ´ë¹„(%s)ê°€ì‹œì— ì†ì„ ì°”ë¦¬ê³  ë§ì•˜ìŠµë‹ˆë‹¤. >\n", pGulbi->GetName().c_str());
 		result = (AttackResult)(rand() % ATTACK_COUNT);
 		damage = pGulbi->Power() + (rand() % POWER_OFFSET * 2) - POWER_OFFSET;
 		m_PC->HitCheck(result, damage);                
 
 		if(!m_PC->IsAlive()) {
-			printf_s(" °ú·Î·Î ÀÎÇØ ±âÀıÇØ ¹ö¸®°í ¸»¾Ò½À´Ï´Ù. \n");
+			printf_s(" ê³¼ë¡œë¡œ ì¸í•´ ê¸°ì ˆí•´ ë²„ë¦¬ê³  ë§ì•˜ìŠµë‹ˆë‹¤. \n");
 			battleResult = BATTLE_LOSE;
 		}
 		
@@ -191,12 +212,12 @@ BattleResult CGameManager::StartBattle( CGulbi* pGulbi) {
 		Sleep(250);
 	}
 
-	printf_s("<<<<< ¼ÕÁúÇÑ ±¼ºñ¸¦ °í°´¿¡°Ô Àü´ŞÇØÁÖ¾ú½À´Ï´Ù. >>>>>>\n");
+	printf_s("<<<<< ì†ì§ˆí•œ êµ´ë¹„ë¥¼ ê³ ê°ì—ê²Œ ì „ë‹¬í•´ì£¼ì—ˆìŠµë‹ˆë‹¤. >>>>>>\n");
 	m_GameState = NORMAL;
 	return battleResult;
 }
 
 void CGameManager::nonMovable()
 {
-	printf_s("ÇöÀç Àå¼Ò¿¡¼­´Â ±× °÷À¸·Î ÀÌµ¿ÇÒ ¼ö ¾ø½À´Ï´Ù.");
+	printf_s("í˜„ì¬ ì¥ì†Œì—ì„œëŠ” ê·¸ ê³³ìœ¼ë¡œ ì´ë™í•  ìˆ˜ ì—†ìŠµë‹ˆë‹¤.");
 }
