@@ -12,6 +12,24 @@ enum BattleResult {
 	BATTLE_LOSE
 };
 
+enum GulbiPart {
+	HEAD,
+	FIN,
+	TAIL,
+	NUM_OF_PARTS
+};
+
+enum DayName {
+	MONDAY,
+	TUESDAY,
+	WEDNESDAY,
+	THURSDAY,
+	FRIDAY,
+	SATURDAY,
+	SUNDAY,
+	DAYNAME_COUNT
+};
+
 class CGameManager
 {
 public:
@@ -25,10 +43,14 @@ protected:
 	bool InputProc();
 	void CreateGulbies();
 	void CheckMap();
-	void nonMovable();
+	void NonMovable();
 	BattleResult StartBattle(CGulbi * pGulbi);
+	void TypePart();
 	CGameMap m_Map;
 	CPC * m_PC;
 	GameState m_GameState;
+	int m_Day;
+	int m_Hour;
+	std::string m_DayName[DAYNAME_COUNT];
+	int m_NumOfWeek;
 };
-

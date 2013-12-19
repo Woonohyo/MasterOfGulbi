@@ -44,7 +44,7 @@ void CCharacter::PrintPosition() {
 	if(m_mapState == STORAGE)
 		printf_s("[현재 창고 내에서의 위치: %d, %d]\n", m_position.x, m_position.y);
 	else
-		printHere();
+		PrintHere();
 }
 
 void CCharacter::HitCheck(AttackResult result, int damage) {
@@ -65,22 +65,31 @@ void CCharacter::HitCheck(AttackResult result, int damage) {
 	}
 }
 
-void CCharacter::printHere() {
+void CCharacter::PrintHere() {
 	switch(m_mapState) {
 	case HOME:
-		printf_s("집입니다..\n");
+		printf_s("편안한 집입니다. [잠자기]를 통해 체력을 회복할 수 있습니다.\n");
+		printf_s("[잠자기]를 통해 시간당 체력을 10 회복할 수 있습니다.\n")
 		break;
 	case STORAGE:
-		printf_s("창고입니다..\n");
-		printf_s("창고 내 이동이 가능합니다..\n");
+		printf_s("굴비를 보관 중인 냉동창고입니다. 이 곳에서는 이동할 때마다 체력이 감소합니다.\n");
+		printf_s("w, a, s, d의 입력을 통해 이동할 수 있습니다.\n");
 		break;
 	case DEPARTMENT:
-		printf_s("백화점입니다.\n");
+		printf_s("손님을 맞이할 수 있는 백화점입니다. [호객]을 통해 손님을 맞이할 수 있습니다.\n");
+		printf_s("[호객]은 30분의 시간을 소모합니다.\n");
 		break;
 	case SUBWAY:
-		printf_s("지하철입니다.\n");
+		printf_s("백화점과 집 사이를 오갈 수 있는 지하철입니다.\n[탑승]을 통해 반대편으로 갈 수 있습니다. \n");
+		printf_s("백화점과 집은 편도 1시간이 걸립니다.");
 		break;
 	default:
 		break;
 	}
 }
+
+void CCharacter::recoverHp(int hours) {
+	m_HP = m_HP + hours * 10;
+}
+
+

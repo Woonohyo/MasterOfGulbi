@@ -5,11 +5,17 @@
 CPC::CPC(void)
 {
 	m_Power = 50;
-	m_Name = "이원효";
+	m_Name = "김밍밍";
 	m_Exp = 0;
 }
 
 
 CPC::~CPC(void)
 {
+}
+
+void CPC::TakeSleep( int hourSleep )
+{
+	m_recoverHp(hourSleep);
+	
 }

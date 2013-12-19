@@ -53,15 +53,15 @@ public:
 	bool IsAlive() { return m_HP > 0; }
 	void HitCheck(AttackResult result, int damage);
 
-	void goHome() {m_mapState = HOME;}
-	void goDepartment() {m_mapState = DEPARTMENT;}
-	void goSubway() {m_mapState = SUBWAY;}
-	void goStorage() {m_mapState = STORAGE;}
-	void printHere();
-	bool isSubway() {if(m_mapState==SUBWAY) return true; else return false;}
-	bool isStorage() {if(m_mapState==STORAGE) return true; else return false;}
-	bool isHome() {if(m_mapState==HOME) return true; else return false;}
-	bool isDepartment() {if(m_mapState==DEPARTMENT) return true; else return false;}
+	void GoHome() {m_mapState = HOME;}
+	void GoDepartment() {m_mapState = DEPARTMENT;}
+	void GoSubway() {m_mapState = SUBWAY;}
+	void GoStorage() {m_mapState = STORAGE;}
+	void PrintHere();
+	bool IsSubway() {if(m_mapState==SUBWAY) return true; else return false;}
+	bool IsStorage() {if(m_mapState==STORAGE) return true; else return false;}
+	bool IsHome() {if(m_mapState==HOME) return true; else return false;}
+	bool IsDepartment() {if(m_mapState==DEPARTMENT) return true; else return false;}
 
 
 protected:
@@ -71,5 +71,6 @@ protected:
 	int m_HP;
 	int m_Power;
 	int m_Exp;
+	void recoverHp(int hours);
 };
 
