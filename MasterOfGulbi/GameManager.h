@@ -43,7 +43,6 @@ public:
 	int m_Hour;
 	std::string m_DayName[DAYNAME_COUNT];
 	int m_NumOfWeek;
-
 	static CGameManager* GetInstance();
 
 protected:
@@ -56,8 +55,5 @@ protected:
 	CGameMap m_Map;
 	CPC * m_PC;
 	GameState m_GameState;
-
-	static CGameManager* m_instance;
-	
-	
+	static CGameManager* m_GameManager;
 };

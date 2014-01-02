@@ -3,6 +3,7 @@
 #include "GameMap.h"
 #include <time.h>
 #include "GameManager.h"
+#include "Windows.h"
 
 CCharacter::CCharacter(void):m_HP(100) {
 	m_position.x = m_position.y = 0;
@@ -63,6 +64,7 @@ void CCharacter::HitCheck(AttackResult result, int damage) {
 	default:
 		break;
 	}
+	Sleep(500);
 }
 
 void CCharacter::PrintHere() {
@@ -76,8 +78,8 @@ void CCharacter::PrintHere() {
 		printf_s("w, a, s, d의 입력을 통해 이동할 수 있습니다.\n");
 		break;
 	case DEPARTMENT:
-		printf_s("손님을 맞이할 수 있는 백화점입니다. [호객]을 통해 손님을 맞이할 수 있습니다.\n");
-		printf_s("[호객]은 30분의 시간을 소모합니다.\n");
+		printf_s("손님을 맞이할 수 있는 백화점입니다. \n[호객]을 통해 손님을 맞이할 수 있습니다.\n");
+		printf_s("[호객]은 1시간의 시간을 소모합니다. \n체력이 감소하는 대신 경험치가 상승합니다.\n\n");
 		break;
 	case SUBWAY:
 		printf_s("백화점과 집 사이를 오갈 수 있는 지하철입니다.\n[이동]을 통해 반대편으로 갈 수 있습니다. \n");

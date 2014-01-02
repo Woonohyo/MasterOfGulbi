@@ -5,7 +5,7 @@
 
 #define POWER_OFFSET 3
 
-CGameManager* CGameManager::m_instance = nullptr;
+CGameManager* CGameManager::m_GameManager = nullptr;
 
 CGameManager::CGameManager(void):
 	m_GameState(NORMAL) {
@@ -53,12 +53,14 @@ void CGameManager::Init() {
 	std::string strInput;
 	getline(std::cin, strInput);
 	m_PC->SetName(strInput);
-	printf_s("내 이름은 %s.\n", m_PC->GetName().c_str());
-	printf_s("201x년 9월. NEXT에서 바쁜 2학기가 끝나고 3주간의 가을방학이 시작되었다.\n");
-	printf_s("하지만 그와 동시에 나에겐 우편물이 하나 날아왔고..\n");
-	printf_s("그건 이전에 미처 갚지 못한 학자금이었다.\n");
-	printf_s("인터넷에서 알바 자리를 찾던 나는 백화점 명절 알바를 찾게 되었고, 결국 백화점 내 굴비 코너에서 일하게 되었다.\n");
+	system("cls");
+	printf_s("내 이름은 %s.\n\n", m_PC->GetName().c_str());
+	printf_s("201x년 9월. NEXT에서 바쁜 2학기가 끝나고 3주간의 가을방학이 시작되었다.\n\n");
+	printf_s("하지만 그와 동시에 나에겐 우편물이 하나 날아왔고..\n\n");
+	printf_s("그건 이전에 미처 갚지 못한 학자금이었다.\n\n");
+	printf_s("인터넷에서 알바 자리를 찾던 나는 백화점 명절 알바를 찾게 되었고, 결국 백화점 내 굴비 코너에서 일하게 되었다.\n\n");
 	printf_s("내게 남은 방학 기간은 20여일.. 이 기간 동안 200만원을 모아야 한다!\n\n");
+	printf_s("[아무 키나 입력해주세요]");
 	getchar();
 	system("cls");
 	printf_s("지금부터 게임설명을 해드리겠습니다.\n");
@@ -77,6 +79,7 @@ void CGameManager::Run() {
 }
 
 void CGameManager::Release() {
+	system("cls");
 	printf_s("[게임이 끝났습니다.]\n");
 }
 
@@ -90,13 +93,13 @@ bool CGameManager::InputProc() {
 			m_PC->Move(DIR_UP);
 		}
 		else if(strInput == "A" || strInput == "a") {
-		m_PC->Move(DIR_LEFT);
+			m_PC->Move(DIR_LEFT);
 		}
 		else if(strInput == "S" || strInput == "s") {
-		m_PC->Move(DIR_DOWN);
+			m_PC->Move(DIR_DOWN);
 		}
 		else if(strInput == "D" || strInput == "d") {
-		m_PC->Move(DIR_RIGHT);
+			m_PC->Move(DIR_RIGHT);
 		}
 	}
 
@@ -105,12 +108,14 @@ bool CGameManager::InputProc() {
 	}
 
 	if(strInput == "정보") {
+		system("cls");
 		printf_s("현재 체력은 %d입니다.\n", m_PC->HP());
 		printf_s("현재 경험치는 %d입니다.\n", m_PC->Exp());
 		printf_s("지금은 9월 %d일 %s입니다.\n현재 시각은 %d시입니다.\n", m_Day, m_DayName[m_NumOfWeek].c_str(), m_Hour);
 	}
 
 	if (strInput == "이동") {
+		system("cls");
 		int userSelect = 0;
 		printf_s("어디로 이동하시겠습니까?\n");
 		printf_s("1.집  2.지하철  3.백화점  4.냉동창고\n");
@@ -122,87 +127,113 @@ bool CGameManager::InputProc() {
 
 	if (strInput == "도움") {
 		system("cls");
-		printf_s("정보: 현재 체력, 경험치, 시각을 확인합니다.\n");
-		printf_s("이동: 집, 지하철, 백화점, 냉동창고 등으로 이동합니다.\n");
-		printf_s("여기: 현재 위치하고 있는 장소를 표시합니다.\n");
+		printf_s("정보: 현재 체력, 경험치, 시각을 확인합니다.\n\n");
+		printf_s("이동: 집, 지하철, 백화점, 냉동창고 등으로 이동합니다.\n\n");
+		printf_s("여기: 현재 위치하고 있는 장소를 표시합니다.\n\n");
+		printf_s("캐릭터의 체력은 아르바이트를 하다보면 감소하고, 퇴근 후 집에서 휴식을 통해 회복할 수 있습니다.\n\n");
+		printf_s("최대 체력은 100이고, 그 이상 수면을 취해도 체력은 더 이상 늘어나지 않습니다.\n\n");
+		printf_s("시간은 이동을 함에 따라 흘러갑니다.\n첫 날은 10시까지 출근해야 직원에게 혼이 나지 않습니다.\n\n");
+		printf_s("경험치를 쌓을수록 착용할 수 있는 아이템의 종류가 늘어납니다.\n\n");
 	}
 
-// 	if(strInput == "집") {
-// 		if(m_PC->IsSubway()) {
-// 			m_PC->GoHome();
-// 			m_PC->PrintHere();
-// 		}
-// 		else if (m_PC->IsHome()) {
-// 			printf_s("현재 집에 위치해 있습니다.\n");
-// 		}
-// 		else {
-// 			NonMovable();
-// 		}
-// 	}
+	if(strInput == "호객" && m_PC->IsDepartment()) {
+		system("cls");
+		printf_s("조금 부끄럽지만 소리를 쳐 손님의 이목을 끌어봅니다.\n");
+		Sleep(250);
+		printf_s("%s: 팔가네 영광 굴비 있습니다!\n", m_PC->GetName().c_str());
+		Sleep(250);
+		printf_s("%s: 굴비 한 번 보고 가세요~\n", m_PC->GetName().c_str());
+		printf_s("%s는 조금 부끄러워 졌습니다.\n", m_PC->GetName().c_str());
+		NumHoursLater(1);
+		srand((unsigned)time(NULL));
+		int randNum = rand() % 5;
+		printf_s("호객 결과, 약간의 체력이 감소했습니다.\n");
+		m_PC->HPDamaged(3);
+		printf_s("경험치가 %d 상승했습니다.\n", randNum);
+		m_PC->GetExp(randNum);
+	}
+
+	// 	if(strInput == "집") {
+	// 		if(m_PC->IsSubway()) {
+	// 			m_PC->GoHome();
+	// 			m_PC->PrintHere();
+	// 		}
+	// 		else if (m_PC->IsHome()) {
+	// 			printf_s("현재 집에 위치해 있습니다.\n");
+	// 		}
+	// 		else {
+	// 			NonMovable();
+	// 		}
+	// 	}
 
 	if(strInput == "잠자기") {
 		int hourSleep = 0;
 		if (m_PC->IsHome()) {
 			printf_s("몇 시간동안 잠을 자겠습니까?");
 			scanf_s("%d", &hourSleep);
-			
+
 			if ( hourSleep < 0 )
 				printf_s("음수로 어떻게 잠을 자나요ㅡ_ㅡ\n\n");
-			//else if ( hourSleep + m_Hour > 8 )
-			//	printf_s("그렇게 잤다가는 지각하고 말걸요..\n\n");
-			else
+			else if (hourSleep > 8)
+				printf_s("그렇게 많이 잘 수는 없어요.\n\n");
+			else {
+				printf_s("피곤한 몸을 이끌고 침대에 누웠습니다.\n");
 				m_PC->TakeSleep(hourSleep);
+			}
 		}
 	}
 
-// 	if(strInput == "백화점") {
-// 		if (m_PC->IsSubway() || m_PC->IsStorage()) {
-// 			m_PC->GoDepartment();
-// 			m_PC->PrintHere();
-// 		}
-// 		else if (m_PC->IsDepartment()) {
-// 			printf_s("현재 백화점에 위치해 있습니다.\n");
-// 		}
-// 		else {
-// 			NonMovable();
-// 		}
-// 	}
+	// 	if(strInput == "백화점") {
+	// 		if (m_PC->IsSubway() || m_PC->IsStorage()) {
+	// 			m_PC->GoDepartment();
+	// 			m_PC->PrintHere();
+	// 		}
+	// 		else if (m_PC->IsDepartment()) {
+	// 			printf_s("현재 백화점에 위치해 있습니다.\n");
+	// 		}
+	// 		else {
+	// 			NonMovable();
+	// 		}
+	// 	}
 
-// 	if(strInput == "창고") {
-// 		if (m_PC->IsDepartment()) {
-// 			m_PC->GoStorage();
-// 			m_PC->PrintHere();
-// 			srand((unsigned)time(NULL));
-// 			CreateGulbies();
-// 		}
-// 		else if (m_PC->IsStorage()) {
-// 			printf_s("현재 창고에 위치해 있습니다.\n");
-// 		}
-// 		else { 
-// 			NonMovable();
-// 		}
-// 	}
-// 
-// 	if(strInput == "지하철") {
-// 		if (m_PC->IsHome() || m_PC->IsDepartment()) {
-// 			m_PC->GoSubway();
-// 			m_PC->PrintHere();
-// 		}
-// 		else if (m_PC->IsSubway()) {
-// 			printf_s("현재 지하철에 위치해 있습니다.\n");
-// 		}
-// 		else {
-// 			NonMovable();
-// 		}
-// 	}
+	// 	if(strInput == "창고") {
+	// 		if (m_PC->IsDepartment()) {
+	// 			m_PC->GoStorage();
+	// 			m_PC->PrintHere();
+	// 			srand((unsigned)time(NULL));
+	// 			CreateGulbies();
+	// 		}
+	// 		else if (m_PC->IsStorage()) {
+	// 			printf_s("현재 창고에 위치해 있습니다.\n");
+	// 		}
+	// 		else { 
+	// 			NonMovable();
+	// 		}
+	// 	}
+	// 
+	// 	if(strInput == "지하철") {
+	// 		if (m_PC->IsHome() || m_PC->IsDepartment()) {
+	// 			m_PC->GoSubway();
+	// 			m_PC->PrintHere();
+	// 		}
+	// 		else if (m_PC->IsSubway()) {
+	// 			printf_s("현재 지하철에 위치해 있습니다.\n");
+	// 		}
+	// 		else {
+	// 			NonMovable();
+	// 		}	
+	// 	}
 
-	if(strInput == "Q" || strInput == "q")
+	if(strInput == "Q" || strInput == "q") {
+		printf_s("게임을 종료합니다.\n\n");
 		return false;
-	
+	}
+
 	return true;
 }
 
 void CGameManager::CreateGulbies() {
+	system("cls");
 	char buf[32] = {0,};
 
 	int gulbiCount = (MAP_SIZE * MAP_SIZE) / 4;
@@ -254,10 +285,11 @@ BattleResult CGameManager::StartBattle( CGulbi* pGulbi) {
 	}
 
 	while (m_PC->IsAlive() && pGulbi->IsAlive()) {
+		system("cls");
 		printf_s("< 굴비를 손질합니다. >\n");
 		srand((unsigned)time(NULL));
 		TypePart();
-		
+
 		AttackResult result = (AttackResult)(rand() % ATTACK_COUNT);
 
 		// POWER_OFFSET만큼 데미지에 +- 한다. 많이 쓰이는 기법!
@@ -299,15 +331,18 @@ void CGameManager::NonMovable()
 }
 
 void CGameManager::TypePart() {
+	system("cls");
 	//머리, 지느러미, 꼬리를 선택하기 위한 난수 생성
 	// 머리 = HEAD = 0
 	// 지느러미 = FIN = 1
 	// 꼬리 = TAIL = 2
 	std::string partInput;
 	int randNum;
+	int randDam;
 
 	while (true) {
-		randNum = rand() % NUM_OF_PARTS;	
+		randNum = rand() % NUM_OF_PARTS;
+		randDam = rand() % 5;
 		switch (randNum) {
 		case HEAD: {
 			printf_s("머리를 잘라야합니다: ");
@@ -316,8 +351,11 @@ void CGameManager::TypePart() {
 				printf_s("머리를 무사히 잘랐습니다.\n\n");
 				return;
 			}
-			else 
+			else {
+				m_PC->HPDamaged(randDam);
 				printf_s("으악! 잘못 잘라서 직원에게 쿠사리를 먹었습니다.\n\n");
+				printf_s("체력이 %d 감소했습니다.", randDam);
+			}
 				   }
 		case FIN: {
 			printf_s("지느러미를 잘라야합니다: ");
@@ -326,8 +364,11 @@ void CGameManager::TypePart() {
 				printf_s("지느러미를 무사히 잘랐습니다.\n");
 				return;
 			}
-			else 
+			else { 
+				m_PC->HPDamaged(randDam);
 				printf_s("으악! 잘못 잘라서 직원에게 쿠사리를 먹었습니다.\n\n");
+				printf_s("체력이 %d 감소했습니다\n.", randDam);
+			}
 				  }
 		case TAIL: {
 			printf_s("꼬리를 잘라야합니다: ");
@@ -336,8 +377,11 @@ void CGameManager::TypePart() {
 				printf_s("꼬리를 무사히 잘랐습니다.\n\n");
 				return;
 			}
-			else 
+			else {
+				m_PC->HPDamaged(randDam);
 				printf_s("으악! 잘못 잘라서 직원에게 쿠사리를 먹었습니다.\n\n");
+				printf_s("체력이 %d 감소했습니다.", randDam);
+			}
 				   }
 		}
 	}
@@ -356,10 +400,10 @@ void CGameManager::NumHoursLater(int hours) {
 
 CGameManager* CGameManager::GetInstance()
 {
-	if (m_instance == NULL)
+	if (m_GameManager == NULL)
 	{
-		m_instance = new CGameManager;
+		m_GameManager = new CGameManager;
 	}
 
-	return m_instance;
+	return m_GameManager;
 }
