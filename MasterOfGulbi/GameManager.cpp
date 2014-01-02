@@ -5,6 +5,8 @@
 
 #define POWER_OFFSET 3
 
+CGameManager* CGameManager::m_instance = nullptr;
+
 CGameManager::CGameManager(void):
 	m_GameState(NORMAL) {
 		m_PC = new CPC();
@@ -55,9 +57,13 @@ void CGameManager::Init() {
 	printf_s("201x년 9월. NEXT에서 바쁜 2학기가 끝나고 3주간의 가을방학이 시작되었다.\n");
 	printf_s("하지만 그와 동시에 나에겐 우편물이 하나 날아왔고..\n");
 	printf_s("그건 이전에 미처 갚지 못한 학자금이었다.\n");
-	printf_s("cls");
+	printf_s("인터넷에서 알바 자리를 찾던 나는 백화점 명절 알바를 찾게 되었고, 결국 백화점 내 굴비 코너에서 일하게 되었다.\n");
+	printf_s("내게 남은 방학 기간은 20여일.. 이 기간 동안 200만원을 모아야 한다!\n\n");
+	getchar();
+	system("cls");
 	printf_s("지금부터 게임설명을 해드리겠습니다.\n");
 	printf_s("본 게임은 9월 2일(월)부터 9월 22일(일)까지 21일간 S백화점의 굴비 코너에서 추석 명절 아르바이트를 해서 돈을 모으는 게임입니다.\n");
+	printf_s("도움말을 보려면 '도움'을 입력하시면 됩니다.");
 
 	m_PC -> SetPosition(0, 0);
 	m_PC -> PrintPosition();
@@ -98,78 +104,101 @@ bool CGameManager::InputProc() {
 		m_PC->PrintHere();
 	}
 
-	if(strInput == "c" || strInput == "C") {
+	if(strInput == "정보") {
 		printf_s("현재 체력은 %d입니다.\n", m_PC->HP());
 		printf_s("현재 경험치는 %d입니다.\n", m_PC->Exp());
 		printf_s("지금은 9월 %d일 %s입니다.\n현재 시각은 %d시입니다.\n", m_Day, m_DayName[m_NumOfWeek].c_str(), m_Hour);
 	}
 
-	if(strInput == "집") {
-		if(m_PC->IsSubway()) {
-			m_PC->GoHome();
-			m_PC->PrintHere();
-		}
-		else if (m_PC->IsHome()) {
-			printf_s("현재 집에 위치해 있습니다.\n");
-		}
-		else {
-			NonMovable();
-		}
+	if (strInput == "이동") {
+		int userSelect = 0;
+		printf_s("어디로 이동하시겠습니까?\n");
+		printf_s("1.집  2.지하철  3.백화점  4.냉동창고\n");
+		scanf_s("%d", &userSelect);
+		m_PC->MoveCharacter(userSelect);
+		if (m_PC->IsStorage()) 
+			CreateGulbies();
 	}
+
+	if (strInput == "도움") {
+		system("cls");
+		printf_s("정보: 현재 체력, 경험치, 시각을 확인합니다.\n");
+		printf_s("이동: 집, 지하철, 백화점, 냉동창고 등으로 이동합니다.\n");
+		printf_s("여기: 현재 위치하고 있는 장소를 표시합니다.\n");
+	}
+
+// 	if(strInput == "집") {
+// 		if(m_PC->IsSubway()) {
+// 			m_PC->GoHome();
+// 			m_PC->PrintHere();
+// 		}
+// 		else if (m_PC->IsHome()) {
+// 			printf_s("현재 집에 위치해 있습니다.\n");
+// 		}
+// 		else {
+// 			NonMovable();
+// 		}
+// 	}
 
 	if(strInput == "잠자기") {
 		int hourSleep = 0;
 		if (m_PC->IsHome()) {
 			printf_s("몇 시간동안 잠을 자겠습니까?");
-			scanf_s("%d", hourSleep);
-			m_PC->TakeSleep(hourSleep);
+			scanf_s("%d", &hourSleep);
+			
+			if ( hourSleep < 0 )
+				printf_s("음수로 어떻게 잠을 자나요ㅡ_ㅡ\n\n");
+			//else if ( hourSleep + m_Hour > 8 )
+			//	printf_s("그렇게 잤다가는 지각하고 말걸요..\n\n");
+			else
+				m_PC->TakeSleep(hourSleep);
 		}
 	}
 
-	if(strInput == "백화점") {
-		if (m_PC->IsSubway() || m_PC->IsStorage()) {
-			m_PC->GoDepartment();
-			m_PC->PrintHere();
-		}
-		else if (m_PC->IsDepartment()) {
-			printf_s("현재 백화점에 위치해 있습니다.\n");
-		}
-		else {
-			NonMovable();
-		}
-	}
+// 	if(strInput == "백화점") {
+// 		if (m_PC->IsSubway() || m_PC->IsStorage()) {
+// 			m_PC->GoDepartment();
+// 			m_PC->PrintHere();
+// 		}
+// 		else if (m_PC->IsDepartment()) {
+// 			printf_s("현재 백화점에 위치해 있습니다.\n");
+// 		}
+// 		else {
+// 			NonMovable();
+// 		}
+// 	}
 
-	if(strInput == "창고") {
-		if (m_PC->IsDepartment()) {
-			m_PC->GoStorage();
-			m_PC->PrintHere();
-			srand((unsigned)time(NULL));
-			CreateGulbies();
-		}
-		else if (m_PC->IsStorage()) {
-			printf_s("현재 창고에 위치해 있습니다.\n");
-		}
-		else { 
-			NonMovable();
-		}
-	}
-
-	if(strInput == "지하철") {
-		if (m_PC->IsHome() || m_PC->IsDepartment()) {
-			m_PC->GoSubway();
-			m_PC->PrintHere();
-		}
-		else if (m_PC->IsSubway()) {
-			printf_s("현재 지하철에 위치해 있습니다.\n");
-		}
-		else {
-			NonMovable();
-		}
-	}
+// 	if(strInput == "창고") {
+// 		if (m_PC->IsDepartment()) {
+// 			m_PC->GoStorage();
+// 			m_PC->PrintHere();
+// 			srand((unsigned)time(NULL));
+// 			CreateGulbies();
+// 		}
+// 		else if (m_PC->IsStorage()) {
+// 			printf_s("현재 창고에 위치해 있습니다.\n");
+// 		}
+// 		else { 
+// 			NonMovable();
+// 		}
+// 	}
+// 
+// 	if(strInput == "지하철") {
+// 		if (m_PC->IsHome() || m_PC->IsDepartment()) {
+// 			m_PC->GoSubway();
+// 			m_PC->PrintHere();
+// 		}
+// 		else if (m_PC->IsSubway()) {
+// 			printf_s("현재 지하철에 위치해 있습니다.\n");
+// 		}
+// 		else {
+// 			NonMovable();
+// 		}
+// 	}
 
 	if(strInput == "Q" || strInput == "q")
 		return false;
-
+	
 	return true;
 }
 
@@ -220,7 +249,7 @@ void CGameManager::CheckMap() {
 BattleResult CGameManager::StartBattle( CGulbi* pGulbi) {
 	BattleResult battleResult = (BattleResult)NULL;
 	if (!m_PC->IsAlive()) {
-		printf_s(" 기절 상태에서는 굴비를 손질할 수 없습니다.\n ");
+		printf_s("기절 상태에서는 굴비를 손질할 수 없습니다.\n ");
 		m_GameState = NORMAL;
 	}
 
@@ -312,4 +341,25 @@ void CGameManager::TypePart() {
 				   }
 		}
 	}
+}
+
+void CGameManager::NumHoursLater(int hours) {
+	m_Hour = m_Hour + hours;
+	if (m_Hour > 24) {
+		m_Hour -= 24;
+		m_Day++;
+		m_NumOfWeek++;
+		if(m_NumOfWeek == 7)
+			m_NumOfWeek = 0;
+	}
+}
+
+CGameManager* CGameManager::GetInstance()
+{
+	if (m_instance == NULL)
+	{
+		m_instance = new CGameManager;
+	}
+
+	return m_instance;
 }

@@ -38,6 +38,13 @@ public:
 	void Init();
 	void Run();
 	void Release();
+	void NumHoursLater(int hours);
+	int m_Day;
+	int m_Hour;
+	std::string m_DayName[DAYNAME_COUNT];
+	int m_NumOfWeek;
+
+	static CGameManager* GetInstance();
 
 protected:
 	bool InputProc();
@@ -49,8 +56,8 @@ protected:
 	CGameMap m_Map;
 	CPC * m_PC;
 	GameState m_GameState;
-	int m_Day;
-	int m_Hour;
-	std::string m_DayName[DAYNAME_COUNT];
-	int m_NumOfWeek;
+
+	static CGameManager* m_instance;
+	
+	
 };

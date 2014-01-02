@@ -1,5 +1,6 @@
 #include "stdafx.h"
 #include "PC.h"
+#include "GameManager.h"
 
 
 CPC::CPC(void)
@@ -16,6 +17,6 @@ CPC::~CPC(void)
 
 void CPC::TakeSleep( int hourSleep )
 {
-	m_recoverHp(hourSleep);
-	
+	RecoverHp(hourSleep);
+	CGameManager::GetInstance()->NumHoursLater(hourSleep);
 }

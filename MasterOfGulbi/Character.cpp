@@ -1,6 +1,8 @@
 ﻿#include "stdafx.h"
 #include "Character.h"
 #include "GameMap.h"
+#include <time.h>
+#include "GameManager.h"
 
 CCharacter::CCharacter(void):m_HP(100) {
 	m_position.x = m_position.y = 0;
@@ -11,20 +13,18 @@ CCharacter::~CCharacter(void) {
 }
 
 Position CCharacter::Move(DIRECTION dir) {
-
-	// agebreak : 이동시에 0 ~ 10까지 가는 버그가 있습니다. (0 ~ 9까지 가야됨)
 	switch (dir) {
 	case DIR_UP:
 		m_position.y = __max(m_position.y - 1, 0);
 		break;
 	case DIR_DOWN:
-		m_position.y = __min(m_position.y + 1, MAP_SIZE);
+		m_position.y = __min(m_position.y + 1, MAP_SIZE - 1);
 		break;
 	case DIR_LEFT:
 		m_position.x = __max(m_position.x - 1, 0);
 		break;
 	case DIR_RIGHT:
-		m_position.x = __min(m_position.x + 1, MAP_SIZE);
+		m_position.x = __min(m_position.x + 1, MAP_SIZE - 1);
 		break;
 	default:
 		break;
@@ -69,7 +69,7 @@ void CCharacter::PrintHere() {
 	switch(m_mapState) {
 	case HOME:
 		printf_s("편안한 집입니다. [잠자기]를 통해 체력을 회복할 수 있습니다.\n");
-		printf_s("[잠자기]를 통해 시간당 체력을 10 회복할 수 있습니다.\n")
+		printf_s("[잠자기]를 통해 시간당 체력을 10 회복할 수 있습니다.\n");
 		break;
 	case STORAGE:
 		printf_s("굴비를 보관 중인 냉동창고입니다. 이 곳에서는 이동할 때마다 체력이 감소합니다.\n");
@@ -80,16 +80,78 @@ void CCharacter::PrintHere() {
 		printf_s("[호객]은 30분의 시간을 소모합니다.\n");
 		break;
 	case SUBWAY:
-		printf_s("백화점과 집 사이를 오갈 수 있는 지하철입니다.\n[탑승]을 통해 반대편으로 갈 수 있습니다. \n");
-		printf_s("백화점과 집은 편도 1시간이 걸립니다.");
+		printf_s("백화점과 집 사이를 오갈 수 있는 지하철입니다.\n[이동]을 통해 반대편으로 갈 수 있습니다. \n");
+		printf_s("백화점과 집은 편도 1시간이 걸립니다.\n");
 		break;
 	default:
 		break;
 	}
 }
 
-void CCharacter::recoverHp(int hours) {
-	m_HP = m_HP + hours * 10;
+void CCharacter::RecoverHp(int hours) {
+	int amountOfRecover = hours * 10;
+	printf_s("체력이 %d 회복 됩니다\n", amountOfRecover);
+	m_HP = m_HP + amountOfRecover;
 }
 
+void CCharacter::MoveCharacter(int userSelect) {
+	switch(userSelect - 1) {
+	case HOME:
+		if(IsSubway()) {
+			GoHome();
+			PrintHere();
+		}
+		else if (IsHome()) {
+			printf_s("현재 집에 위치해 있습니다.\n");
+		}
+		else {
+			NonMovable();
+		}
+		break;
+	case STORAGE:
+		if (IsDepartment()) {
+			GoStorage();
+			PrintHere();
+		}
+		else if (IsStorage()) {
+			printf_s("현재 창고에 위치해 있습니다.\n");
+		}
+		else { 
+			NonMovable();
+		}
 
+		break;
+	case DEPARTMENT:
+		if (IsSubway() || IsStorage()) {
+			GoDepartment();
+			PrintHere();
+		}
+		else if (IsDepartment()) {
+			printf_s("현재 백화점에 위치해 있습니다.\n");
+		}
+		else {
+			NonMovable();
+		}
+		break;
+	case SUBWAY:
+		if (IsHome() || IsDepartment()) {
+			GoSubway();
+			CGameManager::GetInstance()->NumHoursLater(1);
+			PrintHere();
+		}
+		else if (IsSubway()) {
+			printf_s("현재 지하철에 위치해 있습니다.\n");
+		}
+		else {
+			NonMovable();
+		}
+		break;
+	default:
+		break;
+	}
+}
+
+void CCharacter::NonMovable()
+{
+	printf_s("현재 장소에서는 그 곳으로 이동할 수 없습니다.");
+}

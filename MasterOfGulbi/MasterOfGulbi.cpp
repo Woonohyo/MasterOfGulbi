@@ -5,11 +5,11 @@
 #include "GameManager.h"
 
 int _tmain(int argc, _TCHAR* argv[]) {
-	CGameManager gameManager;
+	CGameManager::GetInstance();
 
-	gameManager.Init();
-	gameManager.Run();
-	gameManager.Release();
+	CGameManager::GetInstance()->Init();
+	CGameManager::GetInstance()->Run();
+	CGameManager::GetInstance()->Release();
 
 	getchar();
 	return 0;

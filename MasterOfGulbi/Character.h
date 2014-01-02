@@ -61,9 +61,10 @@ public:
 	bool IsSubway() {if(m_mapState==SUBWAY) return true; else return false;}
 	bool IsStorage() {if(m_mapState==STORAGE) return true; else return false;}
 	bool IsHome() {if(m_mapState==HOME) return true; else return false;}
-	bool IsDepartment() {if(m_mapState==DEPARTMENT) return true; else return false;}
-
-
+	bool IsDepartment() {if(m_mapState==DEPARTMENT) return true; else return false;} 
+	void MoveCharacter(int userSelect);
+	void NonMovable();
+	
 protected:
 	Position m_position;
 	MapState m_mapState;
@@ -71,6 +72,5 @@ protected:
 	int m_HP;
 	int m_Power;
 	int m_Exp;
-	void recoverHp(int hours);
+	void RecoverHp(int hours);	
 };
-
